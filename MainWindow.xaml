@@ -1,0 +1,79 @@
+﻿<Window x:Class="MaterialCalculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MaterialCalculator" Height="750" Width="1100"
+        Background="#F3F3F3">
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBlock Text="目标产物:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+            <TextBox x:Name="TargetItemInput" Width="180" VerticalContentAlignment="Center" Margin="0,0,20,0" Text="铁锭"/>
+            <TextBlock Text="所需数量:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+            <TextBox x:Name="TargetQtyInput" Width="80" VerticalContentAlignment="Center" Text="10"/>
+        </StackPanel>
+
+        <GroupBox Grid.Row="1" Margin="0,0,0,10">
+            <HeaderedContentControl.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text=" 当前库存 " VerticalAlignment="Center"/>
+                    <Button Content=" + 添加物品 " Click="AddInventoryRow_Click" 
+                    Padding="5,0" Margin="10,0,0,0" Cursor="Hand"
+                    Background="#FF84DB88" Foreground="White" BorderThickness="0"/>
+                </StackPanel>
+            </HeaderedContentControl.Header>
+
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="InventoryContainer" Margin="5"/>
+            </ScrollViewer>
+        </GroupBox>
+
+        <Button Grid.Row="2" 
+        x:Name="CalculateButton" 
+        Content="🚀 运行全量计算" 
+        Height="35" Width="150" 
+        HorizontalAlignment="Right" 
+        Background="#FF83BEED" Foreground="White" 
+        FontWeight="Bold" Margin="0,0,0,10"
+        Click="CalculateButton_Click"/>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <GroupBox Grid.Column="0" Header=" 完整合成树结构 " Margin="0,0,5,0">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <TextBlock x:Name="TreeOutput" FontFamily="Consolas" FontSize="12" 
+                               Text="[L0] 铁锭 x 10&#x0a;      [L1] 铁胚 x 20..." Background="#F8F8F8"/>
+                </ScrollViewer>
+            </GroupBox>
+
+            <Grid Grid.Column="1" Margin="5,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+
+                <GroupBox Grid.Row="0" Header=" 最终基础材料总缺口 " Margin="0,0,0,5">
+                    <TextBox x:Name="BaseMaterialOutput" IsReadOnly="True" AcceptsReturn="True" 
+                 BorderThickness="0" Background="#F0F9F0" FontFamily="Consolas"
+                 VerticalScrollBarVisibility="Auto"/>
+                </GroupBox>
+
+                <GroupBox Grid.Row="1" Header=" 按 Level 统计生产任务 " Margin="0,5,0,0">
+                    <TextBox x:Name="LevelTaskOutput" IsReadOnly="True" AcceptsReturn="True" 
+                 BorderThickness="0" Background="#F0F4F9" FontFamily="Consolas"
+                 VerticalScrollBarVisibility="Auto"/>
+                </GroupBox>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
